@@ -1,14 +1,14 @@
-import * as React from "react";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Link from "next/link";
-import Sidebar, { SidebarItem, MenuItems } from "@/components/layout/sidebar";
+import React from "react";
+import { Container, Button, Typography, Box, List, ListItem, ListItemText } from "@mui/material";
+import { useRouter } from "next/router";
+import Sidebar, { MenuItems } from '@/components/layout/sidebar';
 import HomeIcon from "@mui/icons-material/Home";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-export default function Home() {
+export default function Settings() {
+  const router = useRouter();
+
   return (
     <>
       <Sidebar sidebarItems={MenuItems} />
@@ -24,7 +24,7 @@ export default function Home() {
             }}
           >
             <Typography variant="h4" component="h1" gutterBottom>
-              Leaderboard Dashboard
+              Settings
             </Typography>
           </Box>
         </Container>

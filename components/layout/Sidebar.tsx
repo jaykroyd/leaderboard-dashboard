@@ -14,19 +14,31 @@ import ListItemText from "@mui/material/ListItemText";
 import { FC } from "react";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material";
+import { useRouter } from "next/router";
+import HomeIcon from "@mui/icons-material/Home";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const drawerWidth = 240;
 
+export const MenuItems: SidebarItem[] = [
+  { name: "Home", icon: <HomeIcon />, href: "/" },
+  { name: "Leaderboards", icon: <LeaderboardIcon />, href: "/leaderboards"},
+  { name: "Settings", icon: <SettingsIcon />, href: "/settings"},
+];
+
 export interface SidebarItem {
-    name: string;
-    icon: React.ReactNode;
-  };
+  name: string;
+  icon: React.ReactNode;
+  href: string;
+}
 
 interface Props {
   sidebarItems: SidebarItem[];
 }
 
 const Sidebar: FC<Props> = ({ sidebarItems }) => {
+  const router = useRouter();
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -45,12 +57,13 @@ const Sidebar: FC<Props> = ({ sidebarItems }) => {
         <Toolbar />
         <List>
           {sidebarItems.map((item) => (
-            <ListItem key={item.name} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            </ListItem>
+            <ListItemButton
+              key={item.name}
+              onClick={() => router.push(item.href)}
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.name} />
+            </ListItemButton>
           ))}
         </List>
       </Drawer>
